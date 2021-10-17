@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<beans>
+    <bean id="userDao" class="com.stelpolvo.dao.UserDaoImpl"/>
+    <bean id="userService" class="com.stelpolvo.service.UserServiceImpl">
+        <property name="UserDao" ref="userDao"/>
+    </bean>
+</beans>
