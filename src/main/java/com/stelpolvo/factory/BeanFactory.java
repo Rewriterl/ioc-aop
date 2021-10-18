@@ -1,5 +1,6 @@
 package com.stelpolvo.factory;
 
+import com.stelpolvo.proxy.ProxyManager;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
@@ -51,6 +52,7 @@ public class BeanFactory {
         } catch (DocumentException | ClassNotFoundException | NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
         }
+        ProxyManager proxyManager = new ProxyManager();
     }
 
     public static Object getBean(String id) {
