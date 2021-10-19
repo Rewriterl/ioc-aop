@@ -1,25 +1,19 @@
-package com.stelpolvo.proxy;
+package com.stelpolvo.factory.proxy;
 
 import com.stelpolvo.factory.BeanFactory;
 import com.stelpolvo.service.UserService;
 
 import java.lang.reflect.Proxy;
 
-public class ProxyManager {
-    public static UserService getProxy() {
+public class ProxyFactory {
+    public static Object getProxy(Object obj) {
         // 暂时使用手动注入
-        UserService userService = (UserService) BeanFactory.getBean("userService");
-        return (UserService) Proxy.newProxyInstance(userService.getClass().getClassLoader(), userService.getClass().getInterfaces(),
+        return Proxy.newProxyInstance(obj.getClass().getClassLoader(), obj.getClass().getInterfaces(),
                 (proxy1, method, args) -> {
                     Object invoke = null;
                     long l = System.currentTimeMillis();
-                    for (int i = 1; i < 101; i++) {
-                        System.out.print(i);
-                        if (i % 10 == 0) System.out.println();
-                    }
-                    System.out.println();
                     try {
-                        invoke = method.invoke(userService, args);
+                        invoke = method.invoke(obj, args);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
